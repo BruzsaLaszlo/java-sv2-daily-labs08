@@ -24,7 +24,7 @@ public class NumberSequence {
         double average = getAverageOfNumbers();
         List<Integer> result = new ArrayList<>();
         for (int i : numbers) {
-            if (average + value >= i && average - value <= i)
+            if (Math.abs(i - average) <= value)
                 result.add(i);
         }
         return result;
