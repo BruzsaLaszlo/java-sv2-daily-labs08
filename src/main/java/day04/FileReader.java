@@ -17,13 +17,40 @@ public class FileReader {
             int day = Integer.parseInt(lines.get(i).substring(2, 4).trim());
             int max = Integer.parseInt(lines.get(i).substring(6, 8).trim());
             int min = Integer.parseInt(lines.get(i).substring(12, 14).trim());
-            if (max - min < minDegree) {
+
+            int diff = max - min;
+            if (diff < minDegree) {
                 minDay = day;
-                minDegree = max - min;
+                minDegree = diff;
             }
         }
 
         return minDay;
+    }
+
+
+    public String findSmallestDifferent(Path path) throws IOException {
+
+        List<String> lines = Files.readAllLines(path);
+
+        int minDif = 100;
+        String minTeam = null;
+        for (int i = 1; i < lines.size() - 1; i++) {
+            if (i == 18)
+                continue;
+
+            String team = lines.get(i).substring(7, 22).trim();
+            int f = Integer.parseInt(lines.get(i).substring(43, 45).trim());
+            int a = Integer.parseInt(lines.get(i).substring(50, 52).trim());
+
+            int dif = Math.abs(f - a);
+            if (dif < minDif) {
+                minTeam = team;
+                minDif = dif;
+            }
+        }
+
+        return minTeam;
     }
 
 }
